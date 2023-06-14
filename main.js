@@ -2,6 +2,8 @@ let sort_down = 1;
 
 function init() {
 
+    purgeExpiredFilms();
+
     window.addEventListener('click', function(e){
 	
         if (!document.getElementById('dropdown-content').contains(e.target)){
@@ -55,6 +57,13 @@ function init() {
     }
 
     printRows(database);
+
+}
+
+function purgeExpiredFilms() {
+
+    let time_now = Math.floor(Date.now() / 1000);
+    database = database.filter(a => a.e > time_now);
 
 }
 
