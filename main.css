@@ -58,16 +58,16 @@ a:visited { text-decoration: none; }
   font-size: 8px;
 }
 
-#az-btn:hover {
-  background-color: var(--blue4);
+@media (hover: hover) {
+  #az-btn:hover {background-color: var(--blue4);}
 }
 
 .highlight-btn {
   background-color: var(--blue1);
 }
 
-.highlight-btn:hover {
-  background-color: var(--blue4);
+@media (hover: hover) {
+  .highlight-btn:hover {  background-color: var(--blue4);}
 }
 
 #az-btn > div {
@@ -89,8 +89,8 @@ a:visited { text-decoration: none; }
   background-color: var(--blue1);
 }
 
-.dropdown-btn:hover {
-  background-color: var(--blue4);
+@media (hover: hover) {
+  .dropdown-btn:hover {background-color: var(--blue4);}
 }
 
 textarea {
@@ -123,8 +123,8 @@ textarea {
   user-select: none;
 }
 
-#footer:hover {
-  background-color: var(--blue4);
+@media (hover: hover) {
+  #footer:hover {background-color: var(--blue4);}
 }
 
 .film-row {
