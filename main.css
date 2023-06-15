@@ -11,9 +11,7 @@
 }
 
 body {
-  min-height: 100vh;
-  min-height: fill-available;
-  min-height: -webkit-fill-available;
+
   font-family: Verdana;
   display: block;
   background-color: var(--blue1);
@@ -31,6 +29,7 @@ a:visited { text-decoration: none; }
   width: 100vw;
   max-width: 768px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  height: 100%;
 }
 
 #top-container {
