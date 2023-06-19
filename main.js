@@ -2,16 +2,60 @@ let sort_down = 1;
 
 function init() {
 
+    console.log(database.length);
+
     purgeExpiredFilms();
+    addRemoveChildrenBehaviour();
+    buildRows();
+    fillFooter();
+    highlightNumber(0);
 
-    window.addEventListener('click', function(e){
-	
-        if (!document.getElementById('dropdown-content').contains(e.target)){
-            removeContentChildren();
+}
+
+function fillFooter() {
+
+    let max_value = Math.ceil(database.length / 100);
+    let container = document.getElementById("numbers-container");
+    container.style.width = (max_value * 38).toString() + "px";
+
+    for (let i = 1; i < max_value + 1; i++) {
+
+        let new_number = document.createElement("div");
+        new_number.className = "foot-number";
+        new_number.innerText = i.toString();
+        container.appendChild(new_number);
+    
+    }
+    
+}
+
+function highlightNumber(value) {
+
+    let container = document.getElementById("numbers-container");
+
+
+    for (let i = 0; i < container.children.length; i++) {
+
+        if (i == value) {
+
+            container.children[i].style.backgroundColor = "var(--blue4)";
+
+        } else {
+
+            container.children[i].style.backgroundColor = "var(--blue1)";
+            container.children[i].onclick = function() { highlightNumber(i) } ;
+
         }
-    });
 
-    let container = document.getElementById('rows-container');
+
+    }
+
+    printRows(value);
+    backToTop();
+
+}
+
+function buildRows() {
 
     for (let i = 0; i < database.length; i++) {
 
@@ -20,7 +64,7 @@ function init() {
 
         let col1 = document.createElement("div");
         col1.className = "col1";
-        col1.style = "grid-row: 1; padding-top: 2px;"
+        col1.style = "grid-row: 1; padding-top: 2px; padding-left: 2px;"
         col1.innerHTML = "<img src='" + database[i].h + ".png'></img>"
         new_row.appendChild(col1);
 
@@ -43,20 +87,16 @@ function init() {
         new_row.appendChild(timeleft);
 
         let score = document.createElement("div");
-        if (database[i].d <= 3) score.className = "score7 ";       
-        if (database[i].d <= 2.5) score.className = "score7p5 ";       
-        if (database[i].d <= 2) score.className = "score8 ";
-        score.className += "score-box";
+        if (database[i].d <= 3) score.style = "color: var(--gold3);";       
+        if (database[i].d <= 2.5) score.style = "color: var(--gold2);";       
+        if (database[i].d <= 2) score.style = "color: var(--gold1);";
+        score.className = "score-box";
         
         score.innerHTML = "<p>" + (10 - database[i].d).toString() + "</p>";
         new_row.appendChild(score);
-
-        container.appendChild(new_row);
         database[i].element = new_row;
 
     }
-
-    printRows(database);
 
 }
 
@@ -64,6 +104,16 @@ function purgeExpiredFilms() {
 
     let time_now = Math.floor(Date.now() / 1000);
     database = database.filter(a => a.e > time_now);
+
+}
+
+function addRemoveChildrenBehaviour() {
+
+    window.addEventListener('click', function(e){
+
+        if (!document.getElementById('dropdown-content').contains(e.target)) removeContentChildren();
+
+    });
 
 }
 
@@ -126,7 +176,7 @@ function flipOrder() {
 
 function backToTop() {
 
-    document.getElementById("top-container").scrollTop = 0;
+    window.scrollTo(0, 0);
 
 }
 
@@ -163,17 +213,18 @@ function sortFilms(value) {
     
 }
 
-function printRows(array) {
+function printRows(value) {
 
-    let height_acc = 0;
+    let max_value = Math.min((value + 1) * 100, database.length)
+    let container = document.getElementById("rows-container");
+    container.innerHTML = "";
 
-    for (let i = 0; i < array.length; i++) {
-        array[i].element.style.top = (height_acc).toString() + "px";
-        if (i % 2 == 1) {
-            array[i].element.style.backgroundColor = 'var(--blue4)';
-        } else {
-            array[i].element.style.backgroundColor = 'var(--blue3)';  
-        }
-        height_acc += array[i].element.offsetHeight;
+
+    for (let i = value * 100 ; i < max_value ; i++) {
+    
+        database[i].element.style.backgroundColor = (i % 2 == 1) ? 'var(--blue3)' :  'var(--blue4)';
+        container.appendChild(database[i].element);
+    
     }
+
 }

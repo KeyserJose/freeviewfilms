@@ -8,26 +8,23 @@
 </head>
 <body onload="init();">
 	<div id="main-container">
-		<div id="footer" onclick="backToTop();"><span>Back to Top</span></div>
-		<div id="top-container">
-			<div id="head-container">
-				<div id="sort-section" style="display: flex;">
-					<div style="padding: 10px; padding-left: 0px; width: 70px;">Sort by: </div>
-					<div id="dropdown-content">
-						<div class="dropdown-btn highlight-btn" onclick="showDropdown('Rating');"><p style="text-align: left;" id="btn-value">IMDb Rating<span style="float: right;">&#9660</span></p></div>
-					</div>
-					<div id="az-btn" class="highlight-btn" onclick="flipOrder()">
-						<div id="a-label" style="grid-column: 1; grid-row: 1;">Z</div>
-						<div id="z-label" style="grid-column: 1; grid-row: 2;">A</div>
-						<div style="grid-column: 2; grid-row: 1 2; line-height: 28px; font-size: 28px;">&#8595</div>
-					</div>
-				</div>
-				<div style="padding-top: 18px; display: flex;">
-					<div style="padding: 10px; padding-left: 0px; width: 70px;">Search: </div>
-					<textarea id="search-box" class="highlight-btn" onkeyup="filterByName()"></textarea>
-				</div>
+		<div id="head-container">
+			<p style="grid-row: 1; grid-column: 1; padding-left: 0px;">Sort by:</p>
+			<div id="dropdown-content">
+				<div class="dropdown-btn"><p style="text-align: left;" id="btn-value">IMDb Rating<span style="float: right;">&#9660</span></p></div>
 			</div>
-			<div id="rows-container"></div>
+			<div id="az-btn">
+				<div id="a-label" style="grid-column: 1; grid-row: 1; justify-self: end; line-height: 26px;">Z</div>
+				<div id="z-label" style="grid-column: 1; grid-row: 2; justify-self: end; line-height: 16px;">A</div>
+				<div style="grid-column: 2; grid-row: 1 2; line-height: 32px; font-size: 28px;">&#8595</div>
+			</div>
+			<p style="grid-row: 3; grid-column: 1; padding-left: 0px;">Search:</p>
+			<textarea id="search-box" style="grid-row: 3; grid-column: 2; resize: none;" class="dropdown-btn"></textarea>
+		</div>
+		<div id="rows-container"></div>
+		<div id="footer">
+			<div id="numbers-container">
+			</div>
 		</div>
 	</div>
 </body>

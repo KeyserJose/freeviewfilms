@@ -3,18 +3,15 @@
   --blue2: #242F39;
   --blue3: #28333D;
   --blue4: #2D3741;
+  --textcolor: #ccc;
+  --gold1: #FFC61A;
+  --gold2: #FFD966;
+  --gold3: #FFECB2;
 }
 
 * {
   margin: 0;
   padding: 0;
-}
-
-body {
-
-  font-family: Verdana;
-  display: block;
-  background-color: var(--blue1);
 }
 
 a { 
@@ -23,62 +20,50 @@ a {
 }
 a:visited { text-decoration: none; }
 
+body {
+  font-family: Verdana;
+  background-color: var(--blue1);
+  color: var(--textcolor);
+}
+
+textarea {
+  padding: 10px;
+  background-color: var(--blue1);
+  font-size: 16px;
+  font-family: Verdana;
+  resize: none;
+  box-sizing: border-box;
+  border: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 #main-container {
-  position: relative;
   margin: 0 auto;
   width: 100vw;
   max-width: 768px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
-  height: 100%;
-}
-
-#top-container {
-  height: 95vh;
-  overflow: auto;
 }
 
 #head-container {
-  height: auto;
-  background-color: var(--blue2);
-  color: white;
+  width: 100%;
   padding: 18px;
-  box-sizing: border-box;
-  user-select: none;
-}
-
-#az-btn {
-  margin-left: 18px;
-  height: 40px;
-  width: 40px;
-  background-color: var(--blue1);
   display: grid;
-  grid-template-columns: 20px 20px;
-  grid-template-rows: 20px 20px;
-  font-size: 8px;
+  grid-template-columns: 80px 178px auto;
+  grid-template-rows: 40px 18px 40px;
+  background-color: var(--blue2);
+  user-select: none;
+  box-sizing: border-box;
 }
 
-@media (hover: hover) {
-  #az-btn:hover {background-color: var(--blue4);}
-}
-
-.highlight-btn {
-  background-color: var(--blue1);
-}
-
-@media (hover: hover) {
-  .highlight-btn:hover {  background-color: var(--blue4);}
-}
-
-#az-btn > div {
-  list-style: 20px;
-  font-size: 12px;
-  text-align: center;
+#head-container > p {
+  padding: 10px;
 }
 
 #dropdown-content {
+  grid-row: 1;
+  grid-column: 2;
   z-index: 2;
-  width: 140px;
-  height: 40px;
   display: block;
   overflow: visible;
 }
@@ -86,23 +71,28 @@ a:visited { text-decoration: none; }
 .dropdown-btn {
   padding: 10px;
   background-color: var(--blue1);
+  height: 40px;
+  width: 160px;
+  box-sizing: border-box;
+}
+
+#az-btn {
+  grid-row: 1;
+  grid-column: 3;
+  background-color: var(--blue1);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 20px 20px;
+  grid-template-rows: 20px 20px;
+  font-size: 12px;
+  line-height: 20px;
 }
 
 @media (hover: hover) {
   .dropdown-btn:hover {background-color: var(--blue4);}
-}
-
-textarea {
-  width: 140px;
-  height: 40px;
-  padding: 10px;
-  background-color: var(--blue1);
-  font-size: 16px;
-  font-family: Verdana;
-  color: white;
-  resize: none;
-  box-sizing: border-box;
-  border: none;
+  #az-btn:hover {background-color: var(--blue4);}
+  .foot-number:hover {background-color: var(--blue4);}
 }
 
 #rows-container{
@@ -110,34 +100,16 @@ textarea {
   width: 100%;
 }
 
-#footer {
-  width: 100%;
-  max-width: 768px;
-  height: 5vh;
-  background-color: var(--blue2);
-  color: #ccc;
-  font-weight: bold;
-  line-height: 5vh;
-  text-align: center;
-  user-select: none;
-}
-
-@media (hover: hover) {
-  #footer:hover {background-color: var(--blue4);}
-}
-
 .film-row {
-  position: absolute;
   width: 100%;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  background-color: #222;
-  color: #ccc;
+  padding: 14px;
   font-size: 16px;
   line-height: 28px;
   display: grid;
-  grid-template-columns: auto 3fr 1fr;
+  grid-template-columns: 20px 3fr 1fr;
   grid-template-rows: auto auto; 
+  position: relative;
+  box-sizing: border-box;
 }
 
 .score-box {
@@ -162,11 +134,11 @@ textarea {
 
   justify-self: right;
   margin-right: 14px;
+
 }
 
 .col1 {
   box-sizing: content-box;
-  padding-left: 14px;
   grid-column: 1; 
 }
 
@@ -176,14 +148,27 @@ textarea {
   grid-column: 2; 
 }
 
-.score7{
-  color: #FFECB2;
+#footer {
+  width: 100%;
+  height: 52px;
+  padding: 14px;
+  background-color: var(--blue2);
+  box-sizing: border-box;
+  text-align: center;
 }
 
-.score7p5{
-  color: #FFD966;
+#numbers-container {
+  margin: 0 auto;
+  display: flex;
+  user-select: none;
 }
 
-.score8{
-  color: #FFC61A;
+.foot-number {
+  height: 24px;
+  width: 24px;
+  border-radius: 100%;
+  background-color: var(--blue1);
+  line-height: 24px;
+  margin-left: 7px;
+  margin-right: 7px;
 }
