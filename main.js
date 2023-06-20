@@ -1,4 +1,6 @@
 let sort_down = 1;
+let current_page;
+let current_db;
 
 function init() {
 
@@ -6,53 +8,84 @@ function init() {
 
     purgeExpiredFilms();
     addRemoveChildrenBehaviour();
-    buildRows();
-    fillFooter();
-    highlightNumber(0);
+    fillFooter(database, 0);
 
 }
 
-function fillFooter() {
+function createElements(db, page_value) {
 
-    let max_value = Math.ceil(database.length / 100);
+    let container = document.getElementById("rows-container");
+    container.innerHTML = "";
+    let start_idx = 100 * page_value;
+    let end_idx = Math.min(100 * (page_value + 1), db.length);
+
+    for (let i = start_idx; i < end_idx; i++) {
+
+        let new_row = document.createElement("div");
+        new_row.className = "film-row";
+
+        let col1 = document.createElement("div");
+        col1.className = "col1";
+        col1.style = "grid-row: 1; padding-top: 2px; padding-left: 2px;"
+        col1.innerHTML = "<img src='" + db[i].h + ".png'></img>"
+        new_row.appendChild(col1);
+
+        let name = document.createElement("div");
+        name.className = "col2";
+        name.style = "grid-row: 1;"
+        name.innerHTML = "<a href=" + db[i].g + " target='_blank'><b>" + db[i].a + " (" + db[i].i + ")</b></a>";
+        new_row.appendChild(name);
+
+        let clock = document.createElement("div");
+        clock.className = "col1";
+        clock.style = "grid-row: 2;"
+        clock.innerHTML = "<p>&#9201</p>";
+        new_row.appendChild(clock);
+
+        let timeleft = document.createElement("div");
+        timeleft.className = "col2";
+        timeleft.style = "grid-row: 2;"
+        timeleft.innerHTML = "<p>" + db[i].f + "</p>";
+        new_row.appendChild(timeleft);
+
+        let score = document.createElement("div");
+        if (db[i].d <= 3) score.style = "color: var(--gold3);";       
+        if (db[i].d <= 2.5) score.style = "color: var(--gold2);";       
+        if (db[i].d <= 2) score.style = "color: var(--gold1);";
+        score.className = "score-box";
+        
+        score.innerHTML = "<p>" + (10 - db[i].d).toString() + "</p>";
+        new_row.appendChild(score);
+        container.appendChild(new_row);
+
+    }
+
+}
+
+function fillFooter(db, page_value) {
+
+    let max_value = Math.ceil(db.length / 100);
     let container = document.getElementById("numbers-container");
+    container.innerHTML = "";
     container.style.width = (max_value * 38).toString() + "px";
 
-    for (let i = 1; i < max_value + 1; i++) {
+    for (let i = 0; i < max_value; i++) {
 
         let new_number = document.createElement("div");
         new_number.className = "foot-number";
-        new_number.innerText = i.toString();
+        new_number.innerText = (i + 1).toString();
+
         container.appendChild(new_number);
-    
-    }
-    
-}
-
-function highlightNumber(value) {
-
-    let container = document.getElementById("numbers-container");
-
-
-    for (let i = 0; i < container.children.length; i++) {
-
-        if (i == value) {
-
+        if (i == page_value) {
             container.children[i].style.backgroundColor = "var(--blue4)";
-
         } else {
-
-            container.children[i].style.backgroundColor = "var(--blue1)";
-            container.children[i].onclick = function() { highlightNumber(i) } ;
-
+            container.children[i].onclick = function() {fillFooter(db, i)};
         }
-
-
+    
     }
 
-    printRows(value);
-    backToTop();
-
+    createElements(db, page_value);
+    
 }
 
 function buildRows() {
@@ -147,8 +180,6 @@ function showDropdown(value) {
     createNewElement("Title");
     createNewElement("Year");
 
-    container.style.boxShadow = "rgba(0, 0, 0, 0.24) 0px 3px 8px;"
-
 }
 
 function dropdownSelect(value) {
@@ -170,7 +201,7 @@ function flipOrder() {
     
     sort_down *= -1;
     database.reverse();
-    printRows(database);
+    filterByName();
 
 }
 
@@ -184,14 +215,9 @@ function filterByName() {
 
     let value = document.getElementById("search-box").value;
     console.log(value);
-
-    let container = document.getElementById('rows-container');
-    container.innerHTML = "";
-
     let new_database = database.filter(a => a.a.toLowerCase().includes(value.toLowerCase()));
-    new_database.forEach(a => container.appendChild(a.element));
 
-    printRows(new_database);
+    fillFooter(new_database, 0);
 
 }
 
@@ -209,7 +235,7 @@ function sortFilms(value) {
         database.sort((a,b) => (a[variable] - b[variable]) * sort_down);
     }
 
-    printRows(database);
+    fillFooter(database, 0);
     
 }
 
