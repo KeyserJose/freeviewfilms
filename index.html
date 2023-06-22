@@ -2,9 +2,13 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="main.css">
 	<script src="database.js"></script>
 	<script src="main.js"></script>
+	<title>Freeview Films</title>
 </head>
 <body onload="init();">
 	<div id="main-container">
@@ -19,13 +23,15 @@
 				<div style="grid-column: 2; grid-row: 1 2; line-height: 32px; font-size: 28px;">&#8595</div>
 			</div>
 			<p style="grid-row: 3; grid-column: 1; padding-left: 0px;">Search:</p>
-			<textarea id="search-box" style="grid-row: 3; grid-column: 2; resize: none;" class="dropdown-btn" onkeyup="filterByName()"></textarea>
+			<textarea id="search-box" style="grid-row: 3; grid-column: 2; resize: none; cursor: text;" class="dropdown-btn" onkeyup="filterByName()"></textarea>
+			<div id="time-btn">&#9201</div>
 		</div>
 		<div id="rows-container"></div>
 		<div id="footer">
 			<div id="numbers-container">
 			</div>
 		</div>
+		<div id="back-to-top" onclick="backToTop();">Back to Top</div>
 	</div>
 </body>
 </html>

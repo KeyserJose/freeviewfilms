@@ -21,7 +21,7 @@ a {
 a:visited { text-decoration: none; }
 
 body {
-  font-family: Verdana;
+  font-family: 'Quicksand', sans-serif;
   background-color: var(--blue1);
   color: var(--textcolor);
 }
@@ -41,6 +41,7 @@ textarea {
 
 #main-container {
   margin: 0 auto;
+  position: relative;
   width: 100vw;
   max-width: 768px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
@@ -75,6 +76,7 @@ textarea {
   height: 40px;
   width: 160px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 #az-btn {
@@ -88,11 +90,29 @@ textarea {
   grid-template-rows: 20px 20px;
   font-size: 12px;
   line-height: 20px;
+  cursor: pointer;
+}
+
+#time-btn {
+  grid-row: 3;
+  grid-column: 3;
+  background-color: var(--blue1);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 24px;
+  line-height: 24px;
+  padding-top: 8px;
 }
 
 @media (hover: hover) {
   .dropdown-btn:hover {background-color: var(--blue4);}
   #az-btn:hover {background-color: var(--blue4);}
+  #time-btn:hover {background-color: var(--blue4);}
+  .foot-number:hover {background-color: var(--blue4);}
+  #back-to-top:hover {background-color: var(--blue4);}
 }
 
 #rows-container{
@@ -171,6 +191,22 @@ textarea {
   line-height: 24px;
   margin-left: 7px;
   margin-right: 7px;
+  cursor: pointer;
 }
 
-.foot-number:hover {background-color: var(--blue4);}
+#back-to-top {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  background-color: var(--blue2);
+  z-index: 3;
+  padding: 14px;
+  text-align: center;
+  box-sizing: border-box;
+  line-height: 22px;
+  visibility: hidden;
+  cursor: pointer;
+}
+
