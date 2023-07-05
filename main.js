@@ -23,14 +23,14 @@ function init() {
 
     });
 
-
-    purgeExpiredFilms();
     addRemoveChildrenBehaviour();
     fillFooter(database, 0);
 
 }
 
 function createElements(db, page_value) {
+
+    purgeExpiredFilms();
 
     let container = document.getElementById("rows-container");
     container.innerHTML = "";
@@ -40,28 +40,29 @@ function createElements(db, page_value) {
 
     for (let i = start_idx; i < end_idx; i++) {
 
-        database[i].tr = getTimeRemaining(database[i].e, time_now);
+        database[i].tr = getTimeRemaining(database[i].c, time_now);
 
         let new_row = document.createElement("div");
         new_row.className = "film-row";
 
-        new_row.appendChild(getNewElement("col1", "grid-row: 1; padding-top: 2px; padding-left: 2px;", "<img src='" + db[i].h + ".png'></img>"));
-        new_row.appendChild(getNewElement("col2", "grid-row: 1;", "<a href=" + db[i].g + " target='_blank'><b>" + db[i].a + " (" + db[i].i + ")</b></a>"));
+        new_row.appendChild(getNewElement("col1", "grid-row: 1; padding-top: 2px; padding-left: 2px;", "<img src='" + db[i].e + ".png'></img>"));
+        new_row.appendChild(getNewElement("col2", "grid-row: 1;", "<a href=" + db[i].d + " target='_blank'><b>" + db[i].a + " (" + db[i].f + ")</b></a>"));
         new_row.appendChild(getNewElement("col1", "grid-row: 2;",  "<p>&#9201</p>"));
-        new_row.appendChild(getNewElement("col2", "grid-row: 2;",  "<p>" + (display_date ? db[i].f : db[i].tr) + "</p>"));
+        new_row.appendChild(getNewElement("col2", "grid-row: 2;",  "<p>" + db[i].tr + "</p>"));
 
         let score = document.createElement("div");
-        if (db[i].d <= 3) score.style = "color: var(--gold3);";       
-        if (db[i].d <= 2.5) score.style = "color: var(--gold2);";       
-        if (db[i].d <= 2) score.style = "color: var(--gold1);";
+        if (db[i].b <= 3) score.style = "color: var(--gold3);";       
+        if (db[i].b <= 2.5) score.style = "color: var(--gold2);";       
+        if (db[i].b <= 2) score.style = "color: var(--gold1);";
         score.className = "score-box";
-        score.innerHTML = "<p>" + (10 - db[i].d).toString() + "</p>";
+        score.innerHTML = "<p>" + (10 - db[i].b).toString() + "</p>";
+
+        new_row.style.backgroundColor = (i % 2 == 0) ? "var(--blue3)" : "var(--blue4)";
+
         new_row.appendChild(score);
         container.appendChild(new_row);
 
     }
-
-    document.getElementById("time-btn").onclick = function() {changeTime(db, page_value)};
 
 }
 
@@ -111,7 +112,7 @@ function getNewElement(class_value, style_value, innerHTML_value) {
 }
 
 function fillFooter(db, page_value) {
-
+    
     let max_value = Math.ceil(db.length / 100);
     let container = document.getElementById("numbers-container");
     container.innerHTML = "";
@@ -139,7 +140,7 @@ function fillFooter(db, page_value) {
 function purgeExpiredFilms() {
 
     let time_now = Math.floor(Date.now() / 1000);
-    database = database.filter(a => a.e > time_now);
+    database = database.filter(a => a.c > time_now);
 
 }
 
@@ -226,9 +227,9 @@ function sortFilms(value) {
 
     let variable;
     if (value == "Title") variable = 'a';
-    if (value == "IMDb Rating") variable = 'd';
-    if (value == "Availability") variable = 'e';
-    if (value == "Year") variable = 'i';
+    if (value == "IMDb Rating") variable = 'b';
+    if (value == "Availability") variable = 'c';
+    if (value == "Year") variable = 'f';
 
     if (value == "Title") {
         database.sort((a,b) => (a[variable] > b[variable]) ? 1 * sort_down: ((b[variable] > a[variable]) ? -1 * sort_down: 0));
