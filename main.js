@@ -37,10 +37,12 @@ function createElements(db, page_value) {
     let start_idx = 100 * page_value;
     let end_idx = Math.min(100 * (page_value + 1), db.length);
     let time_now = Math.floor( Date.now() / 1000 );
+    console.log([start_idx, end_idx]);
 
     for (let i = start_idx; i < end_idx; i++) {
 
-        database[i].tr = getTimeRemaining(database[i].c, time_now);
+        db[i].tr = getTimeRemaining(db[i].c, time_now);
+        console.log(db[i].tr);
 
         let new_row = document.createElement("div");
         new_row.className = "film-row";
@@ -76,28 +78,6 @@ function getTimeRemaining(epoch_value, time_now) {
     if (h == 0 && d == 0) return "Less than 1 hour"
     if (d < 1) return h.toString() + " hour" + (h != 1 ? "s" : "");
     return d.toString() + " day" + (d != 1 ? "s " : " ") + h.toString() + " hour" + (h != 1 ? "s" : "");
-
-}
-
-function changeTime(db, page_value) {
-
-    let container = document.getElementById("rows-container");
-    let start_idx = 100 * page_value;
-    let child_number = container.childElementCount;
-
-    if (display_date) {
-        for (i = 0; i < child_number; i++) {
-            container.children[i].children[3].innerHTML = db[start_idx + i].tr;    
-        }
-        display_date = false;
-    } else {
-        for (i = 0; i < child_number; i++) {
-            container.children[i].children[3].innerHTML = db[start_idx + i].f;    
-        }
-        display_date = true;
-    }
-
-
 
 }
 
@@ -218,6 +198,7 @@ function backToTop() {
 function filterByName() {
 
     let value = document.getElementById("search-box").value;
+    console.log(value);
     let new_database = database.filter(a => a.a.toLowerCase().includes(value.toLowerCase()));
     fillFooter(new_database, 0);
 
