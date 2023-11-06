@@ -57,7 +57,7 @@ function createElements(db, page_value) {
         if (db[i].b <= 2.5) score.style = "color: var(--gold2);";       
         if (db[i].b <= 2) score.style = "color: var(--gold1);";
         score.className = "score-box";
-        score.innerHTML = "<p>" + (10 - db[i].b).toString() + "</p>";
+        score.innerHTML = "<p>" + Math.round((100 - db[i].b) / 10).toString() + "</p>";
 
         new_row.style.backgroundColor = (i % 2 == 0) ? "var(--blue3)" : "var(--blue4)";
 
