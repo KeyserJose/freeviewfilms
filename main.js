@@ -53,11 +53,11 @@ function createElements(db, page_value) {
         new_row.appendChild(getNewElement("col2", "grid-row: 2;",  "<p>" + db[i].tr + "</p>"));
 
         let score = document.createElement("div");
-        if (db[i].b <= 3) score.style = "color: var(--gold3);";       
-        if (db[i].b <= 2.5) score.style = "color: var(--gold2);";       
-        if (db[i].b <= 2) score.style = "color: var(--gold1);";
+        if (db[i].b <= 30) score.style = "color: var(--gold3);";       
+        if (db[i].b <= 25) score.style = "color: var(--gold2);";       
+        if (db[i].b <= 20) score.style = "color: var(--gold1);";
         score.className = "score-box";
-        score.innerHTML = "<p>" + Math.round((100 - db[i].b) / 10).toString() + "</p>";
+        score.innerHTML = "<p>" + ((100 - db[i].b) / 10).toString() + "</p>";
 
         new_row.style.backgroundColor = (i % 2 == 0) ? "var(--blue3)" : "var(--blue4)";
 
