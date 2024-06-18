@@ -5,6 +5,8 @@ let display_date = true;
 
 function init() {
 
+    purgeExpiredFilms();
+
     let header = document.getElementById("back-to-top");
 
     document.addEventListener("scroll", (event) => {
@@ -30,7 +32,7 @@ function init() {
 
 function createElements(db, page_value) {
 
-    purgeExpiredFilms();
+    //purgeExpiredFilms();
 
     let container = document.getElementById("rows-container");
     container.innerHTML = "";
